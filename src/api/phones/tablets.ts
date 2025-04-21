@@ -1,4 +1,4 @@
-[
+export const tablets = [
   {
     "id": "apple-ipad-pro-11-2021-128gb-spacegray",
     "namespaceId": "apple-ipad-pro-11-2021",

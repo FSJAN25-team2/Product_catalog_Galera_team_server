@@ -1,4 +1,4 @@
-[
+export const accessories = [
   {
     "id": "apple-watch-series-3-38mm-space-gray",
     "namespaceId": "apple-watch-series-3",

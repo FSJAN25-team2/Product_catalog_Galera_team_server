@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { phones } from "../api/phones/phones";
-import { PhoneDto } from "../dtos/phone.dto";
+import { ProductDto } from "../dtos/product.dto";
 
 export const getAllPhones = async (req: Request, res: Response) => {
   try {
-    res.json(phones as PhoneDto[]);
+    res.json(phones as ProductDto[]);
   } catch (error) {
     res.status(500).json({ message: "Error fetching phones" });
   }

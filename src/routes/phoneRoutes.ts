@@ -3,7 +3,7 @@ import { getAllPhones, getPhoneById } from "../controllers/phoneController";
 
 const router = Router();
 
-router.get("/phones", getAllPhones);
-router.get("/phones/:id", getPhoneById);
+router.get("/", getAllPhones);
+router.get("/:id", getPhoneById);
 
 export default router;
