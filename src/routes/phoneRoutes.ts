@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getAllPhones, getPhoneById } from "../controllers/phoneController";
+import { getAllPhones, getPhoneById } from "../controllers/phoneControllers";
 
 const router = Router();
 
