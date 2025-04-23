@@ -1,14 +1,5 @@
 import { Request, Response } from "express";
 import { tablets } from "../api/phones/tablets";
-import { ProductDto } from "../dtos/product.dto";
-
-export const getAllTablets = async (req: Request, res: Response) => {
-  try {
-    res.json(tablets as ProductDto[]);
-  } catch (error) {
-    res.status(500).json({ message: "Error fetching tablets" });
-  }
-};
 
 export const getTabletById = async (req: Request, res: Response) => {
   const { id } = req.params;
