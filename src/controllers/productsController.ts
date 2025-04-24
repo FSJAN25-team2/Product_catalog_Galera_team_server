@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
 import { products } from "../api/phones/products";
-import { ProductDto } from "../dtos/product.dto";
 import { Category, Sorting } from "../enums/enum";
 
 export const getAllProducts = async (req: Request, res: Response) => {
@@ -39,7 +38,10 @@ export const getAllProducts = async (req: Request, res: Response) => {
 
     const paginatedProducts = response.slice(startIndex, endIndex);
 
-    res.json(paginatedProducts);
+    res.json({
+      totalCount: response.length,
+      products: paginatedProducts,
+    });
   } catch (error) {
     res.status(500).json({ message: "Error fetching product" });
   }

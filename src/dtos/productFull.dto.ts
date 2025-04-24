@@ -1,4 +1,4 @@
-export interface PhoneDto {
+export interface ProductFullDto {
   id: string;
   namespaceId: string;
   name: string;
