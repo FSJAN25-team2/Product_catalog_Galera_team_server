@@ -1,9 +1,9 @@
 import express from "express";
-import phoneRoutes from "./routes/phoneRoutes";
-import tabletRoutes from "./routes/tabletRoutes";
-import productsRoutes from "./routes/productsRoute";
+import phoneRoutes from "../routes/phoneRoutes";
+import tabletRoutes from "../routes/tabletRoutes";
+import productsRoutes from "../routes/productsRoute";
 import cors from "cors";
-import accessoriesRoutes from "./routes/accessoriesRoutes";
+import accessoriesRoutes from "../routes/accessoriesRoutes";
 
 const app = express();
 const port = process.env.PORT || 4000;
