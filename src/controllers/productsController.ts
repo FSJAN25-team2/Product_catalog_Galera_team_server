@@ -50,16 +50,33 @@ export const getAllProducts = async (req: Request, res: Response) => {
 export const getHotPricedProducts = async (req: Request, res: Response) => {
   try {
     const { limit = 8 } = req.query;
-    const response = products.map((product) => ({
-      ...product,
-      discount: product.fullPrice - product.price,
-    }));
+
+    const response = products
+      .filter((product) => product.year !== 2022)
+      .map((product) => ({
+        ...product,
+        discount: product.fullPrice - product.price,
+      }));
 
     response.sort((a, b) => b.discount - a.discount);
 
     const sliced = response.slice(0, +limit);
 
     res.json(sliced);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching hot priced products" });
+  }
+};
+
+export const getProductById = (req: Request, res: Response): void => {
+  const { id } = req.params;
+  try {
+    const product = products.find((product) => product.itemId === id);
+    if (!product) {
+      res.status(404).json({ message: "Product not found" });
+      return;
+    }
+    res.json(product);
   } catch (error) {
     res.status(500).json({ message: "Error fetching product" });
   }
