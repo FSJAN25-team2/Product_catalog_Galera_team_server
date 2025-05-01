@@ -9,14 +9,34 @@ export const getAllProducts = async (req: Request, res: Response) => {
       limit = 16,
       category = Category.Phones,
       sortBy = Sorting.Newest,
+      color,
+      capacity,
+      ram,
     } = req.query;
 
     const currentPage = parseInt(page as string, 10);
     const itemsPerPage = parseInt(limit as string, 10);
 
-    const response = products.filter(
+    let response = products.filter(
       (product) => product.category === category
     );
+
+    if (color) {
+      const colorArr = (color as string).split(',');
+      response = response.filter(product => colorArr.includes(product.color));
+    }
+    
+    if (ram) {
+      const ramArr = (ram as string).split(',');
+      response = response.filter(product => ramArr.includes(product.ram));
+    }
+    
+    if (capacity) {
+      const capacityArr = (capacity as string).split(',');
+      response = response.filter(product => capacityArr.includes(product.capacity));
+    }
+    
+
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -36,11 +56,19 @@ export const getAllProducts = async (req: Request, res: Response) => {
         break;
     }
 
+    const allColors = [...new Set(response.map((product) => product.color))];
+    const allCapacity = [...new Set(response.map((product) => product.capacity)),];
+    const allRam = [...new Set(response.map((product) => product.ram))];
+
     const paginatedProducts = response.slice(startIndex, endIndex);
+    
 
     res.json({
       totalCount: response.length,
       products: paginatedProducts,
+      allColors,
+      allCapacity,
+      allRam,
     });
   } catch (error) {
     res.status(500).json({ message: "Error fetching product" });
