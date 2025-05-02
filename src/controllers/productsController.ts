@@ -21,6 +21,10 @@ export const getAllProducts = async (req: Request, res: Response) => {
       (product) => product.category === category
     );
 
+    const allColors = [...new Set(response.map((product) => product.color))];
+    const allCapacity = [...new Set(response.map((product) => product.capacity)),];
+    const allRam = [...new Set(response.map((product) => product.ram))];
+
     if (color) {
       const colorArr = (color as string).split(',');
       response = response.filter(product => colorArr.includes(product.color));
@@ -35,8 +39,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
       const capacityArr = (capacity as string).split(',');
       response = response.filter(product => capacityArr.includes(product.capacity));
     }
-    
-
 
     const startIndex = (currentPage - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
@@ -56,9 +58,6 @@ export const getAllProducts = async (req: Request, res: Response) => {
         break;
     }
 
-    const allColors = [...new Set(response.map((product) => product.color))];
-    const allCapacity = [...new Set(response.map((product) => product.capacity)),];
-    const allRam = [...new Set(response.map((product) => product.ram))];
 
     const paginatedProducts = response.slice(startIndex, endIndex);
     
